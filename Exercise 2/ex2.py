@@ -60,13 +60,13 @@ def main():
         shuffled_median = int(median(shuffled_data))
 
         avg_bubble_time_best_case = timeit.timeit(lambda:bubble_sort(data.copy()), number = 100) / 100
-        avg_quick_time_best_case = timeit.timeit(lambda:quick_sort(shuffled_data.copy(),i//2 ,i//2 + 1 ), number = 100) / 100
+        avg_quick_time_best_case = timeit.timeit(lambda:quick_sort(shuffled_data.copy(),shuffled_median ,shuffled_median + 1 ), number = 100) / 100
 
         avg_bubble_time_worst_case = timeit.timeit(lambda:bubble_sort(reversed_data.copy()), number = 100) / 100
         avg_quick_time_worst_case = timeit.timeit(lambda:quick_sort(reversed_data.copy(), 0, len(data) - 1), number = 100) / 100
 
         avg_bubble_time_avg_case = timeit.timeit(lambda:bubble_sort(shuffled_data.copy()), number = 100) / 100
-        avg_quick_time_avg_case = timeit.timeit(lambda:quick_sort(shuffled_data.copy(), 0, len(data) - 1), number = 100) / 100
+        avg_quick_time_avg_case = timeit.timeit(lambda:quick_sort(shuffled_data.copy(), len(data)//2 , len(data)//2 + 1), number = 100) / 100
 
         avg_bubble_best_times.append(avg_bubble_time_best_case)
         avg_bubble_worst_times.append(avg_bubble_time_worst_case)
@@ -89,20 +89,33 @@ def main():
     worst_case_quick_sort(help, 0, len(help) - 1)
 
     x = [[i for i in range(5, 101, 5)]]
-    plt.figure(num=1)
+    plt.figure(num=1, figsize= (20, 10))
 
+    plt.subplot(1, 3, 1)
     plt.scatter(x= x, y= avg_bubble_avg_times, label= "Average Bubble Sort Case", color='#3b86ff')
-    plt.scatter(x= x, y= avg_bubble_best_times, label= "Best Bubble Sort Case", color='#3bfff5')
-    plt.scatter(x= x, y= avg_bubble_worst_times, label= "Worst Bubble Sort Case", color='#3bff6c')
-    
     plt.scatter(x= x, y= avg_quick_avg_times, label= "Average Quick Sort Case", color='#ff3b55')
-    plt.scatter(x= x, y= avg_quick_best_times, label= "Best Quick Sort Case", color='#ffd53b')
-    plt.scatter(x= x, y= avg_quick_worst_times, label= "Worst Quick Sort Case", color='#ed7d40')
-    
+    plt.title("Average Times for Quick Sort & Bubble Sort")
     plt.legend(loc="upper left")
     plt.xlabel("Size of Array")
     plt.ylabel("Time")
-    plt.title("Average Times for Quick Sort & Bubble Sort")
+    
+    plt.subplot(1, 3, 2)
+    plt.scatter(x= x, y= avg_bubble_best_times, label= "Best Bubble Sort Case", color='#3bfff5')
+    plt.scatter(x= x, y= avg_quick_best_times, label= "Best Quick Sort Case", color='#ffd53b')
+    plt.title("Average Times for the best case of Quick Sort & Bubble Sort")
+    plt.legend(loc="upper left")
+    plt.xlabel("Size of Array")
+    plt.ylabel("Time")
+    
+    plt.subplot(1, 3, 3)
+    plt.scatter(x= x, y= avg_quick_worst_times, label= "Worst Quick Sort Case", color='#ed7d40')
+    plt.scatter(x= x, y= avg_bubble_worst_times, label= "Worst Bubble Sort Case", color='#3bff6c')
+    plt.title("Average Times for the worst case of Quick Sort & Bubble Sort")
+    plt.legend(loc="upper left")
+    plt.xlabel("Size of Array")
+    plt.ylabel("Time")
+
+    
     plt.show()
     plt.close()
 
