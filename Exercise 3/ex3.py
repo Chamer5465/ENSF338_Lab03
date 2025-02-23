@@ -21,7 +21,7 @@ def main():
     avg_comparisons_list=[]
     avg_swaps_list=[]
     repetitions=[]
-    for i in range (100, 2001, 100):
+    for i in range (100, 2501, 100):
         data = [j for j in range(i)]
         repetitions.append(i)
         comparisons_sum=0
@@ -37,8 +37,9 @@ def main():
             swaps_sum+=swaps
         avg_comparisons_list.append(comparisons_sum/count)
         avg_swaps_list.append(swaps_sum/count)
-        print(avg_comparisons_list)
-        print(avg_swaps_list)
+        print(comparisons_sum/count)
+        print(swaps_sum/count)
+        print("_____________")
     
 
     slope, intercept = np.polyfit(repetitions, avg_comparisons_list, 1)
