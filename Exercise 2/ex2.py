@@ -17,13 +17,6 @@ def quick_sort(array, low, high):
         pivot_index = partition(array, low, high)
         quick_sort(array, low, pivot_index)
         quick_sort(array, pivot_index + 1, high)
-        
-def worst_case_quick_sort(array, low, high):
-    if low < high:
-        pivot_index = partition(array, low, high)
-        worst_case_quick_sort(array, low, pivot_index)
-        worst_case_quick_sort(array, pivot_index + 1, high)
-    
 
 def partition(array, low, high):
     pivot = array[low]
@@ -79,7 +72,7 @@ def main():
         print(f'The bubble sort time for a sorted array of {i} elemets is {avg_bubble_time_best_case}. ')
         print(f'The bubble sort time for a reversed array of {i} elemets is {avg_bubble_time_worst_case}. ')
         print(f'The bubble sort time for a shuffled array of {i} elemets is {avg_bubble_time_avg_case}.\n')
-    
+
         print(f'The quick sort time for an array of {i} elemets is using a random pivot is {avg_quick_time_avg_case}.')
         print(f'The quick sort time for an array of {i} elemets is using a the lowest element as the pivot is {avg_quick_time_worst_case}.')
         print(f'The quick sort time for an array of {i} elemets is using a random pivot is {avg_quick_time_best_case}.')
