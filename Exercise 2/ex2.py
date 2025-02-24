@@ -79,14 +79,10 @@ def main():
         print(f'The bubble sort time for a sorted array of {i} elemets is {avg_bubble_time_best_case}. ')
         print(f'The bubble sort time for a reversed array of {i} elemets is {avg_bubble_time_worst_case}. ')
         print(f'The bubble sort time for a shuffled array of {i} elemets is {avg_bubble_time_avg_case}.\n')
-
+    
         print(f'The quick sort time for an array of {i} elemets is using a random pivot is {avg_quick_time_avg_case}.')
         print(f'The quick sort time for an array of {i} elemets is using a the lowest element as the pivot is {avg_quick_time_worst_case}.')
         print(f'The quick sort time for an array of {i} elemets is using a random pivot is {avg_quick_time_best_case}.')
-    
-    z = 1
-    help = reversed_data.copy()
-    worst_case_quick_sort(help, 0, len(help) - 1)
 
     x = [[i for i in range(5, 101, 5)]]
     plt.figure(num=1, figsize= (20, 10))
@@ -115,7 +111,6 @@ def main():
     plt.xlabel("Size of Array")
     plt.ylabel("Time")
 
-    
     plt.show()
     plt.close()
 
