@@ -35,36 +35,56 @@ def binary_insertion_sort(a, n):
         a[j + 1] = selected
         
 def main():
+    num_trials = 10  
     avg_times_insertion = []
     avg_times_binary = []
     
-    for i in range (5, 101, 5):
-        data = [j for j in range(i)]
-        random.shuffle(data)
+    for i in range(10, 1501, 10): 
+        insertion_times = []
+        binary_times = []
         
-        avg_times_insertion.append(timeit.timeit(lambda:insertion_sort(data.copy()), number= 100) / 100)
-        avg_times_binary.append(timeit.timeit(lambda:binary_insertion_sort(data.copy(), len(data)), number= 100) / 100)
+        for _ in range(num_trials):
+            data = [j for j in range(i)]
+            random.shuffle(data)  
+            
+            insertion_times.append(timeit.timeit(lambda: insertion_sort(data.copy()), number=1))
+            binary_times.append(timeit.timeit(lambda: binary_insertion_sort(data.copy(), len(data)), number=1))
         
-        print(f"The average insertion sort time for a shuffled array of {i} items is {avg_times_insertion[-1]}")
-        print(f"The average binary insertion sort time for a shuffled array of {i} items is {avg_times_binary[-1]}")
+        avg_times_insertion.append(sum(insertion_times) / num_trials)
+        avg_times_binary.append(sum(binary_times) / num_trials)
         
-    x = [i for i in range(5, 101, 5)]
+        print(f"Size {i}: Insertion Sort Avg Time = {avg_times_insertion[-1]:.6f}, Binary Insertion Sort Avg Time = {avg_times_binary[-1]:.6f}")
+        
+    x = [i for i in range(5, 1501, 10)]
     
-    plt.figure(figsize=(20, 10))
+    plt.figure(figsize=(10, 6))
     
-    plt.subplot(1, 2, 1)
-    plt.scatter(x= x, y= avg_times_insertion)
-    plt.title("Average Times for Insertion Sort")
+    plt.plot(x, avg_times_insertion, label="Insertion Sort", marker='o')
+    plt.plot(x, avg_times_binary, label="Binary Insertion Sort", marker='s')
     
-    plt.subplot(1, 2, 2)
-    plt.scatter(x= x, y= avg_times_binary)
-    plt.title("Average Times for Binary Insertion Sort")
+    plt.xlabel("Array Size")
+    plt.ylabel("Average Time")
+    plt.title("Insertion Sort vs. Binary Insertion")
+    plt.legend()
+    plt.grid()
     
     plt.show()
-    plt.close()
-    
-        
-        
     
 if __name__ == '__main__':
     main()
+
+
+
+
+'''
+Q4)
+Search complexity
+Insertion sort complexity (O(n))
+Binary insertion sort complexity(O(log n))
+
+Shifting complexity
+Insertion sort complexity (O(n))
+Binary insertion sort complexity(O(n))
+
+The resources to shift are much higher than the resources to search so even if the search is of lower complexity the overall time is very similar with the binary insertion sort being very slightly faster.
+'''
